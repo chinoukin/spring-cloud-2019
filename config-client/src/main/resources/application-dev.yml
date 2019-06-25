@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    config:
+      uri: http://localhost:8888/
+      name: config-file
+      profile: dev
+      enabled: true
+    bus:
+      trace:
+        enabled: true
+
+  rabbitmq:
+    host: 192.168.70.134
+    port: 5672
+    username: guest
+    password: guest

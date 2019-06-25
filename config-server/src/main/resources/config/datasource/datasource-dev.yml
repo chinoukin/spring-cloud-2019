@@ -1,0 +1,7 @@
+spring:
+  datasource: #spring boot数据源配置
+    type: com.alibaba.druid.pool.DruidDataSource # 使用druid连接池作为数据源
+    url: jdbc:mysql://192.168.20.36:3306/shdp?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
+    username: dbuser
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver

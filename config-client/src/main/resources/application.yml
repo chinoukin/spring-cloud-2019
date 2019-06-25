@@ -1,0 +1,10 @@
+server:
+  port: 8881
+
+spring:
+  application:
+    name: config-client
+  profiles:
+    active: dev
+
+

@@ -1,0 +1,33 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          #uri: https://github.com/chinoukin/SpringcloudConfig         #github
+          uri: git@192.168.70.134:group/springcloudconfig.git          #gitlab
+      enabled: true
+    #        native:
+#          search-locations: classpath:/config,classpath:/config/datasource
+#        bootstrap: true
+    bus:
+      trace:
+        enabled: true
+
+  rabbitmq:
+    host: 192.168.70.134
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  server:
+    port: 8888
+  endpoints:
+    web:
+      exposure:
+        include: "*"

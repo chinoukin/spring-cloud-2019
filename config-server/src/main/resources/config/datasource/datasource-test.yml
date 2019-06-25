@@ -1,0 +1,17 @@
+wbfc:
+  datasource: #数据源配置
+    model: rw  #dyn-动态切换模式,rw-读写分离模式
+    multiple: true
+    names: master,slaver-1 #多个用逗号隔开
+    master:
+      type: com.alibaba.druid.pool.DruidDataSource # 使用druid连接池作为数据源
+      url: jdbc:mysql://192.168.20.36:3306/shdp?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
+      username: dbuser
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+    slaver-1:
+      type: com.alibaba.druid.pool.DruidDataSource # 使用druid连接池作为数据源
+      url: jdbc:mysql://192.168.20.35:3306/shdp?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=Asia/Shanghai
+      username: dbuser
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
