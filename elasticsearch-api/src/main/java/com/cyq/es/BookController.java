@@ -1,5 +1,7 @@
 package com.cyq.es;
 
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -10,6 +12,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.engine.Engine;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -89,5 +92,14 @@ public class BookController {
         GetResponse response = client.get(request, RequestOptions.DEFAULT);
 
         return response.getSourceAsMap();
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    public ResponseEntity<String> deleteDoc(@PathVariable("id") String id) throws Exception{
+        DeleteRequest request = new DeleteRequest("book");
+        request.id(id);
+        DeleteResponse response = client.delete(request, RequestOptions.DEFAULT);
+
+        return new ResponseEntity<>("id:" + id +" deleted!", HttpStatus.OK);
     }
 }
