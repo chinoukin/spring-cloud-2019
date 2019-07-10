@@ -16,6 +16,8 @@ import org.elasticsearch.index.engine.Engine;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,18 +28,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.time.OffsetDateTime;
 
 @RequestMapping("/book")
 @RestController
 public class BookController {
+
+    private Logger logger = LoggerFactory.getLogger(BookController.class);
 
     @Autowired
     private RestHighLevelClient client;
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<String> indexDoc(@RequestBody Book book) {
-        XContentBuilder builder=null;
-        IndexRequest request=new IndexRequest("book");
+        logger.debug("增加成功：" + OffsetDateTime.now() + ",书名:《" + book.getName() + "》");
+        XContentBuilder builder = null;
+        IndexRequest request = new IndexRequest("book");
 
         try {
             builder = XContentFactory.jsonBuilder();
@@ -64,7 +70,8 @@ public class BookController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public Object searchDoc() throws Exception{
+    public Object searchDoc() throws Exception {
+        logger.debug("根据作者曹雪芹查找书");
         SearchRequest request = new SearchRequest("book");
 
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
@@ -86,7 +93,8 @@ public class BookController {
     }
 
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
-    public Object getDoc(@PathVariable("id") String id) throws Exception{
+    public Object getDoc(@PathVariable("id") String id) throws Exception {
+        logger.debug("找书，id=" + id);
         GetRequest request = new GetRequest("book");
         request.id(id);
         GetResponse response = client.get(request, RequestOptions.DEFAULT);
@@ -95,11 +103,20 @@ public class BookController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public ResponseEntity<String> deleteDoc(@PathVariable("id") String id) throws Exception{
+    public ResponseEntity<String> deleteDoc(@PathVariable("id") String id) throws Exception {
+        logger.debug("删除书，id=" + id);
         DeleteRequest request = new DeleteRequest("book");
         request.id(id);
         DeleteResponse response = client.delete(request, RequestOptions.DEFAULT);
 
-        return new ResponseEntity<>("id:" + id +" deleted!", HttpStatus.OK);
+        return new ResponseEntity<>("id:" + id + " deleted!", HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/exception", method = RequestMethod.GET)
+    public ResponseEntity<String> exception() throws Exception {
+        logger.debug("制造异常");
+        int exp = 5 / 0;
+        System.out.println(exp);
+        return new ResponseEntity<>("", HttpStatus.OK);
     }
 }

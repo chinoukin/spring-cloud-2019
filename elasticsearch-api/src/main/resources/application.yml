@@ -3,3 +3,6 @@
 ##    elasticsearch:
 ##      cluster-nodes: 192.168.20.181:9300 # 配置IP及端口号
 ##      cluster-name: elasticsearch
+logging:
+  level:
+    com.cyq.es: debug
