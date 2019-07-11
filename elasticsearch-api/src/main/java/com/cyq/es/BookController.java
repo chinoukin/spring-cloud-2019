@@ -12,7 +12,6 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.index.engine.Engine;
 import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -41,7 +40,6 @@ public class BookController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseEntity<String> indexDoc(@RequestBody Book book) {
-        logger.debug("增加成功：" + OffsetDateTime.now() + ",书名:《" + book.getName() + "》");
         XContentBuilder builder = null;
         IndexRequest request = new IndexRequest("book");
 
@@ -65,7 +63,7 @@ public class BookController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        logger.debug("增加成功：" + OffsetDateTime.now() + ",书名:《" + book.getName() + "》");
         return new ResponseEntity<>("save executed!", HttpStatus.OK);
     }
 
