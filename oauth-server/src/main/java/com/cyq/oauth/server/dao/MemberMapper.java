@@ -2,7 +2,7 @@ package com.cyq.oauth.server.dao;
 
 import com.cyq.oauth.server.entity.Member;
 
-public interface MemberDao {
+public interface MemberMapper {
 
     /**
      * 根据会员名查找会员

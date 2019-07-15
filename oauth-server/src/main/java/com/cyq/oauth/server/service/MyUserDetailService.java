@@ -1,6 +1,6 @@
 package com.cyq.oauth.server.service;
 
-import com.cyq.oauth.server.dao.MemberDao;
+import com.cyq.oauth.server.dao.MemberMapper;
 import com.cyq.oauth.server.entity.Member;
 import com.cyq.oauth.server.entity.Permission;
 import com.cyq.oauth.server.entity.Role;
@@ -19,7 +19,7 @@ import java.util.Set;
 @Service
 public class MyUserDetailService implements UserDetailsService {
     @Autowired
-    private MemberDao memberDao;
+    private MemberMapper memberDao;
 
     @Override
     public UserDetails loadUserByUsername(String memberName) throws UsernameNotFoundException {

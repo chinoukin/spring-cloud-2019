@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.curise.eshop.auth.dao.RoleDao">
+<mapper namespace="com.cyq.oauth.server.dao.RoleMapper">
 
     <resultMap id="baseResultMap" type="com.cyq.oauth.server.entity.Role">
         <id property="id" column="id" jdbcType="INTEGER" />
@@ -8,7 +8,7 @@
         <result property="valid" column="valid" jdbcType="TINYINT" />
         <result property="createTime" column="createTime" jdbcType="TIMESTAMP" />
         <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP" />
-        <collection property="permissions" fetchType="eager" column="id" select="com.curise.eshop.auth.dao.PermissionDao.findByRoleId"></collection>
+        <collection property="permissions" fetchType="eager" column="id" select="com.cyq.oauth.server.dao.PermissionMapper.findByRoleId"></collection>
     </resultMap>
 
     <select id="findByMemberId" resultMap="baseResultMap" parameterType="Integer">

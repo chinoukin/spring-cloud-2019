@@ -4,7 +4,7 @@ import com.cyq.oauth.server.entity.Permission;
 
 import java.util.List;
 
-public interface PermissionDao {
+public interface PermissionMapper {
 
     /**
      * 根据角色id查找权限列表

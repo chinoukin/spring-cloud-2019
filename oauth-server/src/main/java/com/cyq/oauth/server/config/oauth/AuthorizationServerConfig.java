@@ -58,10 +58,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // clients.withClientDetails(clientDetails());
+//         clients.withClientDetails(clientDetails());
         //配置在内存中，也可以从数据库中获取
         clients.inMemory() // 使用in-memory存储
-                .withClient("哈哈") // client_id   android
+                .withClient("admin") // client_id   android
                 .scopes("read")
                 .secret("1")  // client_secret   android
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token") // 该client允许的授权类型

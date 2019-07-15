@@ -4,7 +4,7 @@ import com.cyq.oauth.server.entity.Role;
 
 import java.util.List;
 
-public interface RoleDao {
+public interface RoleMapper {
     /**
      * 根据用户id查找角色列表
      * @param memberId 用户id

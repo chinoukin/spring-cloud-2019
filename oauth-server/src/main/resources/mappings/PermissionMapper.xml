@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.curise.eshop.auth.dao.PermissionDao">
+<mapper namespace="com.cyq.oauth.server.dao.PermissionMapper">
 
     <select id="findByRoleId" resultType="com.cyq.oauth.server.entity.Permission" parameterType="Integer">
       select p.* from es_role_permission rp,es_permission p where rp.permission_id = p.id and rp.role_id = #{roleId,jdbcType=INTEGER}
