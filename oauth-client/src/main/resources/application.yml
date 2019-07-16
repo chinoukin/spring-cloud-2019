@@ -1,0 +1,13 @@
+server:
+  port: 6801
+
+spring:
+  application:
+    name: oauth-client    #不要被这个名字给迷惑了，其实oauth-client就是一个ResourceServer角色
+
+security:
+  oauth2:
+    resource:
+      id: oauth-client
+      user-info-uri: http://localhost:6800/api/member
+      prefer-token-info: false
