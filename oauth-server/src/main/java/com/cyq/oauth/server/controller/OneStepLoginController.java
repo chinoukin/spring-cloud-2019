@@ -30,7 +30,8 @@ public class OneStepLoginController {
     /**
      * 登录
      * authorization_code方式
-     *
+     * 正常在浏览器中访问/oauth/authorize会自动redirect到redirect_url上，这里是前后端分离的Rest登录接口，所以中间的
+     * redirect不会触发
      * @param response
      * @return
      * @throws Exception
