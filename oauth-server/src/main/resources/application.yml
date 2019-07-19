@@ -43,3 +43,4 @@ mybatis:
 logging:
   level:
     org.mybatis: debug
+

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -24,6 +25,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
+@Order(6)
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -61,10 +63,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //         clients.withClientDetails(clientDetails());
         //配置在内存中，也可以从数据库中获取
         clients.inMemory() // 使用in-memory存储
-                .withClient("admin") // client_id   android
+                .withClient("peapod-web") // client_id   android
                 .scopes("read")
-                .secret("1")  // client_secret   android
+                .secret("123456")  // client_secret   android
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token") // 该client允许的授权类型
+                .redirectUris("http://localhost:6800/user/loginSuccess")
+                .autoApprove(true)
                 .and()
                 .withClient("webapp") // client_id
                 .scopes("read")
