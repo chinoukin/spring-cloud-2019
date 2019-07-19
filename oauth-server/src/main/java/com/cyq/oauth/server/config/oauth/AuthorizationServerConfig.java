@@ -69,14 +69,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token") // 该client允许的授权类型
                 .redirectUris("http://localhost:6800/loginSuccess")
                 .autoApprove(true)
+
                 .and()
                 .withClient("webapp") // client_id
                 .scopes("read")
                 //.secret("webapp")  // client_secret
+                .redirectUris("http://baidu.com")
                 .authorizedGrantTypes("implicit")// 该client允许的授权类型
+                .autoApprove(true)
+
                 .and()
                 .withClient("browser")
-                .authorizedGrantTypes("refresh_token", "password")
+                .authorizedGrantTypes("client_credentials")
+                .secret("123456")
                 .scopes("read");
 
 
