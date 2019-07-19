@@ -35,7 +35,7 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/user/login")
+    @RequestMapping("/login")
     public String login(HttpServletResponse response) throws Exception {
 
         String username_pass_encode = "Basic " + Base64.getEncoder().encodeToString("admin:1".getBytes());
@@ -46,7 +46,7 @@ public class LoginController {
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.put("client_id", Collections.singletonList("peapod-web"));
         map.put("response_type", Collections.singletonList("code"));
-        map.put("redirect_url", Collections.singletonList("http://localhost:6800/user/loginSuccess"));
+        map.put("redirect_url", Collections.singletonList("http://localhost:6800/loginSuccess"));
 
         //HttpEntity
         HttpEntity httpEntity = new HttpEntity(map, httpHeaders);
@@ -72,7 +72,7 @@ public class LoginController {
      * @return
      * @throws Exception
      */
-    @RequestMapping("/user/loginSuccess")
+    @RequestMapping("/loginSuccess")
     public ResponseEntity<OAuth2AccessToken> loginSuccess(@RequestParam("code") String code) throws Exception {
         String client_secret = "peapod-web:123456";
 
@@ -82,7 +82,7 @@ public class LoginController {
 
         //授权请求信息
         MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-        map.put("redirect_url", Collections.singletonList("http://localhost:6800/user/loginSuccess"));
+        map.put("redirect_url", Collections.singletonList("http://localhost:6800/loginSuccess"));
         map.put("grant_type", Collections.singletonList("authorization_code"));
         map.put("code", Collections.singletonList(code));
 

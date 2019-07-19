@@ -67,7 +67,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .scopes("read")
                 .secret("123456")  // client_secret   android
                 .authorizedGrantTypes("password", "authorization_code", "refresh_token") // 该client允许的授权类型
-                .redirectUris("http://localhost:6800/user/loginSuccess")
+                .redirectUris("http://localhost:6800/loginSuccess")
                 .autoApprove(true)
                 .and()
                 .withClient("webapp") // client_id
