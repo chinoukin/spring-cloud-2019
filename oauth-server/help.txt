@@ -1,6 +1,15 @@
 几种模式
 1.password
+postman:
 http://localhost:6800/oauth/token?grant_type=password&client_id=peapod-web&client_secret=123456&username=admin&password=1
+curl:
+curl用post请求参数不能在url后面拼接了，所以要像下面这样：
+curl -X POST -d 'client_id=peapod-web&client_secret=123456&grant_type=password&username=admin&password=1' http://192.168.101.219:6800/oauth/token
+或
+curl -X POST -d 'grant_type=password&username=admin&password=1' http://peapod-web:123456@localhost:6800/oauth/token
+或
+curl -X POST -d 'grant_type=password&username=admin&password=1' -H 'Authorization:Basic cGVhcG9kLXdlYjoxMjM0NTY=' http://localhost:6800/oauth/token
+
 
 2.authorization_code
 2.1 http://localhost:6800/oauth/authorize?response=code&client_id=peapod-web&redirect_uri=http://baidu.com
