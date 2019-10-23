@@ -29,3 +29,7 @@ http://localhost:6800/oauth/authorize?response_type=token&client_id=webapp&redir
 4.client_credentials
 http://localhost:6800/oauth/token?grant_type=client_credentials
 使用client_secret的base
+
+5.refresh_token
+http://localhost:8080/oauth/token?grant_type=refresh_token&refresh_token=xxxx
+使用client_secret的base
