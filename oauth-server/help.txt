@@ -8,6 +8,8 @@ curl -X POST -d 'client_id=peapod-web&client_secret=123456&grant_type=password&u
 或
 curl -X POST -d 'grant_type=password&username=admin&password=1' http://peapod-web:123456@localhost:6800/oauth/token
 或
+curl -X POST -d 'grant_type=password&username=admin&password=1' -u 'peapod-web:123456' http://localhost:6800/oauth/token
+或
 curl -X POST -d 'grant_type=password&username=admin&password=1' -H 'Authorization:Basic cGVhcG9kLXdlYjoxMjM0NTY=' http://localhost:6800/oauth/token
 补充(2019.10.23)
 curl用post请求参数能在url后拼接，原因是因为参数中用了特殊字符‘&’,在linux中将其作为后台进程处理了，所以：
