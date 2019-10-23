@@ -1,0 +1,19 @@
+authorization_code
+浏览器:http://zhangsan:123@localhost:8080/oauth/authorize?client_id=client&response_type=code&redirect_uri=http://www.baidu.com
+curl -X POST 'http://client:123@localhost:8080/oauth/token?grant_type=authorization_code&code=xxxx&redirect_uri=http://www.baidu.com'
+
+
+password
+curl -X POST 'http://client:123@localhost:8080/oauth/token?grant_type=password&username=zhangsan&password=123'
+
+
+implicit
+浏览器:http://zhangsan:123@localhost:8080/oauth/authorize?grant_type=implicit&response_type=token&client_id=client&redirect_uri=http://www.baidu.com
+
+
+client_credentials
+curl -X POST 'http://client:123@localhost:8080/oauth/token?grant_type=client_credentials'
+
+
+refresh_token
+curl -X POST 'http://client:123@localhost:8080/oauth/token?grant_type=refresh_token&refresh_token=xxxx'
