@@ -9,17 +9,19 @@ curl -X POST -d 'client_id=peapod-web&client_secret=123456&grant_type=password&u
 curl -X POST -d 'grant_type=password&username=admin&password=1' http://peapod-web:123456@localhost:6800/oauth/token
 或
 curl -X POST -d 'grant_type=password&username=admin&password=1' -H 'Authorization:Basic cGVhcG9kLXdlYjoxMjM0NTY=' http://localhost:6800/oauth/token
-
+补充(2019.10.23)
+curl用post请求参数能在url后拼接，原因是因为参数中用了特殊字符‘&’,在linux中将其作为后台进程处理了，所以：
+curl -X POST 'http://localhost:6800/oauth/token?grant_type=password&client_id=peapod-web&client_secret=123456&username=admin&password=1'
 
 2.authorization_code
-2.1 http://localhost:6800/oauth/authorize?response=code&client_id=peapod-web&redirect_uri=http://baidu.com
+2.1 http://localhost:6800/oauth/authorize?response_type=code&client_id=peapod-web&redirect_uri=http://baidu.com
 使用用户名密码base
 2.2
 http://localhost:6800/oauth/token?grant_type=authorization_code&code=xxxxx&redirect_uri=http://baidu.com
 使用2.1得到的code
 
 3.implict
-http://localhost:6800/oauth/authorize?response=token&client_id=webapp&redirect_uri=http://baidu.com
+http://localhost:6800/oauth/authorize?response_type=token&client_id=webapp&redirect_uri=http://baidu.com
 使用用户名密码base
 
 4.client_credentials
