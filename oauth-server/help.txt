@@ -22,7 +22,7 @@ curl -X POST 'http://localhost:6800/oauth/token?grant_type=password&client_id=pe
 http://localhost:6800/oauth/token?grant_type=authorization_code&code=xxxxx&redirect_uri=http://baidu.com
 使用2.1得到的code
 
-3.implict
+3.implicit
 http://localhost:6800/oauth/authorize?response_type=token&client_id=webapp&redirect_uri=http://baidu.com
 使用用户名密码base
 
