@@ -2,6 +2,7 @@ package com.cyq.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
@@ -51,16 +52,20 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
         // 只有authorization_code、和password方式获得的token才支持refresh_token
     }
 
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter(){
         // jwtAccessTokenConverter
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("test-jwt.jks"), "test123".toCharArray());
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setKeyPair(keyStoreKeyFactory.getKeyPair("test-jwt"));
 
-        // tokenstore
-        TokenStore tokenStore = new JwtTokenStore(converter);
+        return converter;
+    }
 
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        JwtAccessTokenConverter converter = jwtAccessTokenConverter();
+        TokenStore tokenStore = new JwtTokenStore(converter);
         endpoints.tokenStore(tokenStore).tokenEnhancer(converter).authenticationManager(authenticationManager);
 
         // 设置UserDetailsService,否则refrsh_token无法使用

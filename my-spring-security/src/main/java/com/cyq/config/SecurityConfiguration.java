@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         String pass = bCryptPasswordEncoder.encode("123");
 
         auth.inMemoryAuthentication().passwordEncoder(bCryptPasswordEncoder)
-                .withUser("zhangsan").password(pass).roles("USER");
+                .withUser("zhangsan").password(pass).roles("USER", "ADMIN");
     }
 
     @Override
